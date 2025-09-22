@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PRReviewerBot.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:PRReviewerBot.Infrastructure.Extensions.ServiceCollectionExtensions">
+            <summary>
+            Extension methods for registering infrastructure services
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Infrastructure.Extensions.ServiceCollectionExtensions.AddInfrastructure(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds infrastructure services to the dependency injection container
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Infrastructure.HealthChecks.GitHubHealthCheck">
+            <summary>
+            Health check for GitHub API connectivity
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Infrastructure.HealthChecks.OpenAIHealthCheck">
+            <summary>
+            Health check for OpenAI API connectivity
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Infrastructure.Services.OpenAICodeAnalysisService">
+            <summary>
+            OpenAI-powered code analysis service for generating review comments
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Infrastructure.Services.OpenAICodeAnalysisService.AnalyzeCodeChangesAsync(System.Collections.Generic.List{PRReviewerBot.Core.Models.GitHubFile},PRReviewerBot.Core.Interfaces.PullRequestContext)">
+            <summary>
+            Analyzes code changes and generates review comments
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Infrastructure.Services.OpenAICodeAnalysisService.ShouldReviewFile(System.String)">
+            <summary>
+            Determines if a file should be reviewed
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Infrastructure.Services.OpenAICodeAnalysisService.GetFileLanguage(System.String)">
+            <summary>
+            Gets the programming language for a file
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Infrastructure.Services.PullRequestReviewService">
+            <summary>
+            Service for reviewing pull requests and posting comments (NO AUTO-MERGE)
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Infrastructure.Services.PullRequestReviewService.ReviewPullRequestAsync(PRReviewerBot.Core.Models.GitHubWebhookEvent)">
+            <summary>
+            Reviews a pull request and posts comments (does NOT merge)
+            CRITICAL SAFETY CHECK: This method ONLY posts comments - NEVER merges PRs
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Infrastructure.Services.PullRequestReviewService.GetPullRequestFilesAsync(System.String,System.String,System.Int32)">
+            <summary>
+            Gets the files changed in a pull request
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Infrastructure.Services.PullRequestReviewService.PostReviewCommentAsync(System.String,System.String,System.Int32,PRReviewerBot.Core.Models.ReviewComment)">
+            <summary>
+            Posts a review comment on a pull request
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Infrastructure.Services.PullRequestReviewService.PostGeneralCommentAsync(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Posts a general comment on a pull request
+            </summary>
+        </member>
+    </members>
+</doc>

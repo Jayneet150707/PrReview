@@ -43,7 +43,7 @@ public class ReviewResult
     /// <summary>
     /// Creates a successful review result
     /// </summary>
-    public static ReviewResult Success(int commentsAdded = 0, List<string>? reviewedFiles = null)
+    public static ReviewResult CreateSuccess(int commentsAdded = 0, List<string>? reviewedFiles = null)
     {
         return new ReviewResult
         {
@@ -56,7 +56,7 @@ public class ReviewResult
     /// <summary>
     /// Creates a failed review result
     /// </summary>
-    public static ReviewResult Failure(string errorMessage)
+    public static ReviewResult CreateFailure(string errorMessage)
     {
         return new ReviewResult
         {

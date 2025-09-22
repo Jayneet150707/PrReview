@@ -31,7 +31,7 @@ public class OpenAIHealthCheck : IHealthCheck
 
             var response = await _chatClient.CompleteChatAsync(messages, new ChatCompletionOptions
             {
-                MaxTokens = 5,
+                MaxOutputTokenCount = 5,
                 Temperature = 0
             });
 

@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PRReviewerBot.Core</name>
+    </assembly>
+    <members>
+        <member name="T:PRReviewerBot.Core.Interfaces.ICodeAnalysisService">
+            <summary>
+            Service for analyzing code and generating review comments
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Core.Interfaces.ICodeAnalysisService.AnalyzeCodeChangesAsync(System.Collections.Generic.List{PRReviewerBot.Core.Models.GitHubFile},PRReviewerBot.Core.Interfaces.PullRequestContext)">
+            <summary>
+            Analyzes code changes and generates review comments
+            </summary>
+            <param name="files">List of changed files to analyze</param>
+            <param name="prContext">Pull request context information</param>
+            <returns>List of review comments</returns>
+        </member>
+        <member name="M:PRReviewerBot.Core.Interfaces.ICodeAnalysisService.ShouldReviewFile(System.String)">
+            <summary>
+            Determines if a file should be reviewed based on its type and content
+            </summary>
+            <param name="filename">Name of the file</param>
+            <returns>True if the file should be reviewed</returns>
+        </member>
+        <member name="M:PRReviewerBot.Core.Interfaces.ICodeAnalysisService.GetFileLanguage(System.String)">
+            <summary>
+            Gets the programming language for a file based on its extension
+            </summary>
+            <param name="filename">Name of the file</param>
+            <returns>Programming language identifier</returns>
+        </member>
+        <member name="T:PRReviewerBot.Core.Interfaces.PullRequestContext">
+            <summary>
+            Context information for a pull request
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.Title">
+            <summary>
+            Pull request title
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.Description">
+            <summary>
+            Pull request description/body
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.TargetBranch">
+            <summary>
+            Target branch name
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.SourceBranch">
+            <summary>
+            Source branch name
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.Author">
+            <summary>
+            Author of the pull request
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.Repository">
+            <summary>
+            Repository name
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.Owner">
+            <summary>
+            Repository owner
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.PrimaryLanguage">
+            <summary>
+            Primary programming language of the repository
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.TotalAdditions">
+            <summary>
+            Total number of additions in the PR
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.TotalDeletions">
+            <summary>
+            Total number of deletions in the PR
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Interfaces.PullRequestContext.ChangedFiles">
+            <summary>
+            Total number of changed files
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Interfaces.IPullRequestReviewService">
+            <summary>
+            Service for reviewing pull requests and posting comments
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Core.Interfaces.IPullRequestReviewService.ReviewPullRequestAsync(PRReviewerBot.Core.Models.GitHubWebhookEvent)">
+            <summary>
+            Reviews a pull request and posts comments (does NOT merge)
+            </summary>
+            <param name="webhookEvent">GitHub webhook event containing PR information</param>
+            <returns>Result of the review operation</returns>
+        </member>
+        <member name="M:PRReviewerBot.Core.Interfaces.IPullRequestReviewService.GetPullRequestFilesAsync(System.String,System.String,System.Int32)">
+            <summary>
+            Gets the files changed in a pull request
+            </summary>
+            <param name="owner">Repository owner</param>
+            <param name="repo">Repository name</param>
+            <param name="pullNumber">Pull request number</param>
+            <returns>List of changed files</returns>
+        </member>
+        <member name="M:PRReviewerBot.Core.Interfaces.IPullRequestReviewService.PostReviewCommentAsync(System.String,System.String,System.Int32,PRReviewerBot.Core.Models.ReviewComment)">
+            <summary>
+            Posts a review comment on a pull request
+            </summary>
+            <param name="owner">Repository owner</param>
+            <param name="repo">Repository name</param>
+            <param name="pullNumber">Pull request number</param>
+            <param name="comment">Review comment to post</param>
+            <returns>True if comment was posted successfully</returns>
+        </member>
+        <member name="M:PRReviewerBot.Core.Interfaces.IPullRequestReviewService.PostGeneralCommentAsync(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Posts a general comment on a pull request
+            </summary>
+            <param name="owner">Repository owner</param>
+            <param name="repo">Repository name</param>
+            <param name="pullNumber">Pull request number</param>
+            <param name="body">Comment body</param>
+            <returns>True if comment was posted successfully</returns>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.GitHubWebhookEvent">
+            <summary>
+            Represents a GitHub webhook event payload
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.PullRequest">
+            <summary>
+            Represents a GitHub pull request
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.PullRequestBranch">
+            <summary>
+            Represents a GitHub pull request branch
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.Repository">
+            <summary>
+            Represents a GitHub repository
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.User">
+            <summary>
+            Represents a GitHub user
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.GitHubFile">
+            <summary>
+            Represents a GitHub file in a pull request
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.ReviewPolicy">
+            <summary>
+            Defines the review policy for the PR Reviewer Bot
+            CRITICAL: This bot is designed to ONLY review and comment - NEVER merge PRs
+            </summary>
+        </member>
+        <member name="F:PRReviewerBot.Core.Models.ReviewPolicy.NEVER_MERGE_PRS">
+            <summary>
+            IMMUTABLE POLICY: This bot NEVER merges pull requests
+            This is a safety measure to ensure manual review is always required
+            </summary>
+        </member>
+        <member name="F:PRReviewerBot.Core.Models.ReviewPolicy.NEVER_AUTO_APPROVE">
+            <summary>
+            IMMUTABLE POLICY: This bot NEVER approves pull requests automatically
+            All PRs require manual human approval
+            </summary>
+        </member>
+        <member name="F:PRReviewerBot.Core.Models.ReviewPolicy.NEVER_DISMISS_REVIEWS">
+            <summary>
+            IMMUTABLE POLICY: This bot NEVER dismisses existing reviews
+            Human reviews are always preserved
+            </summary>
+        </member>
+        <member name="F:PRReviewerBot.Core.Models.ReviewPolicy.OPERATION_MODE">
+            <summary>
+            Bot operation mode - COMMENT_ONLY is the only supported mode
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Core.Models.ReviewPolicy.ValidateSafeOperation">
+            <summary>
+            Validates that the bot is operating in safe mode (comment-only)
+            </summary>
+            <returns>True if operating safely, throws exception if unsafe operations detected</returns>
+        </member>
+        <member name="M:PRReviewerBot.Core.Models.ReviewPolicy.GetSafetyDisclaimer">
+            <summary>
+            Gets the safety disclaimer for bot comments
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Core.Models.ReviewPolicy.GetOperationSummary">
+            <summary>
+            Gets the bot operation summary
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.ReviewResult">
+            <summary>
+            Represents the result of a pull request review operation
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewResult.Success">
+            <summary>
+            Indicates whether the review operation was successful
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewResult.ErrorMessage">
+            <summary>
+            Error message if the operation failed
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewResult.CommentsAdded">
+            <summary>
+            Number of comments added during the review
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewResult.ReviewedFiles">
+            <summary>
+            List of files that were reviewed
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewResult.LinesReviewed">
+            <summary>
+            Total number of lines of code reviewed
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewResult.ReviewDuration">
+            <summary>
+            Time taken to complete the review
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewResult.Metadata">
+            <summary>
+            Additional metadata about the review
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Core.Models.ReviewResult.CreateSuccess(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+            Creates a successful review result
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Core.Models.ReviewResult.CreateFailure(System.String)">
+            <summary>
+            Creates a failed review result
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.ReviewComment">
+            <summary>
+            Represents a code review comment to be posted
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewComment.FilePath">
+            <summary>
+            The file path where the comment should be posted
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewComment.LineNumber">
+            <summary>
+            The line number where the comment should be posted
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewComment.Body">
+            <summary>
+            The comment body/content
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewComment.Severity">
+            <summary>
+            The severity level of the comment
+            </summary>
+        </member>
+        <member name="P:PRReviewerBot.Core.Models.ReviewComment.Category">
+            <summary>
+            Category of the review comment
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.CommentSeverity">
+            <summary>
+            Severity levels for review comments
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Core.Models.ReviewCategory">
+            <summary>
+            Categories for review comments
+            </summary>
+        </member>
+    </members>
+</doc>

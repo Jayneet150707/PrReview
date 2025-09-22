@@ -4,6 +4,7 @@ using PRReviewerBot.Core.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using Asp.Versioning;
 
 namespace PRReviewerBot.Api.Controllers;
 

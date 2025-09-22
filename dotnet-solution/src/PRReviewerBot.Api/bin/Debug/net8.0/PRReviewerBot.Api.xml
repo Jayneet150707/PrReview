@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PRReviewerBot.Api</name>
+    </assembly>
+    <members>
+        <member name="T:PRReviewerBot.Api.Controllers.WebhookController">
+            <summary>
+            Handles GitHub webhook events for pull request reviews
+            </summary>
+        </member>
+        <member name="M:PRReviewerBot.Api.Controllers.WebhookController.HandleGitHubWebhook(System.Text.Json.JsonElement)">
+            <summary>
+            Handles GitHub webhook events for pull requests
+            </summary>
+            <param name="payload">GitHub webhook payload</param>
+            <returns>Response indicating processing status</returns>
+        </member>
+        <member name="M:PRReviewerBot.Api.Controllers.WebhookController.Health">
+            <summary>
+            Health check endpoint for webhook
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Api.Middleware.ExceptionHandlingMiddleware">
+            <summary>
+            Middleware for handling unhandled exceptions
+            </summary>
+        </member>
+        <member name="T:PRReviewerBot.Api.Middleware.RequestLoggingMiddleware">
+            <summary>
+            Middleware for logging HTTP requests and responses
+            </summary>
+        </member>
+    </members>
+</doc>
