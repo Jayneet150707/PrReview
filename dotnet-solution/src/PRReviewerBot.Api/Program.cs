@@ -1,4 +1,5 @@
 using PRReviewerBot.Core.Interfaces;
+using PRReviewerBot.Core.Models;
 using PRReviewerBot.Infrastructure.Extensions;
 using PRReviewerBot.Api.Middleware;
 using Serilog;
@@ -118,19 +119,28 @@ app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks
     }
 });
 
-// Root endpoint
+// Root endpoint with safety information
 app.MapGet("/", () => new
 {
     service = "PR Reviewer Bot",
     version = "1.0.0",
+    mode = ReviewPolicy.OPERATION_MODE,
     status = "running",
     timestamp = DateTime.UtcNow,
+    safetyPolicy = new
+    {
+        neverMerges = ReviewPolicy.NEVER_MERGE_PRS,
+        neverAutoApproves = ReviewPolicy.NEVER_AUTO_APPROVE,
+        neverDismissesReviews = ReviewPolicy.NEVER_DISMISS_REVIEWS,
+        operationMode = ReviewPolicy.OPERATION_MODE
+    },
     endpoints = new
     {
         health = "/health",
         webhook = "/api/v1/webhook/github",
         swagger = "/swagger"
-    }
+    },
+    disclaimer = "This bot ONLY posts review comments and will NEVER merge, approve, or modify PRs"
 });
 
 try

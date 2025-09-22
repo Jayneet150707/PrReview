@@ -1,6 +1,10 @@
 # PR Reviewer Bot - .NET Core Solution
 
+## 🚫 COMMENT-ONLY MODE - NEVER MERGES PRs
+
 A production-ready automated Pull Request reviewer bot built with .NET Core 8.0 that uses OpenAI to analyze code changes and post intelligent review comments on GitHub PRs.
+
+**🔒 CRITICAL SAFETY FEATURE: This bot ONLY posts review comments and will NEVER merge, approve, or modify your PRs. Manual human review and approval are always required.**
 
 ## 🚀 Features
 
@@ -221,4 +225,16 @@ For issues and questions:
 
 ---
 
-**Note**: This bot only posts review comments and does NOT automatically merge PRs. Manual review and approval are still required for all changes.
+## 🚫 CRITICAL SAFETY REMINDER
+
+**🔒 COMMENT-ONLY MODE**: This bot operates in **COMMENT-ONLY MODE** and includes multiple safety mechanisms:
+
+- ✅ **ONLY posts review comments** - Never merges PRs
+- ✅ **NEVER approves PRs** - Human approval always required  
+- ✅ **NEVER dismisses reviews** - Human reviews preserved
+- ✅ **Built-in safety checks** - Validates safe operation before every action
+- ✅ **Clear safety disclaimers** - All comments include safety information
+
+**📖 For complete safety information, see [COMMENT-ONLY-MODE.md](./COMMENT-ONLY-MODE.md)**
+
+**Perfect for teams that want AI-powered code review assistance without any automation risk!** 🛡️

@@ -79,20 +79,25 @@ public class WebhookController : ControllerBase
                 return Ok(new { message = "Event skipped", reason = "Action or branch not configured for processing" });
             }
 
-            // Process the pull request review
+            // SAFETY CHECK: Validate bot is in comment-only mode before processing
+            ReviewPolicy.ValidateSafeOperation();
+            
+            // Process the pull request review (COMMENT ONLY - NEVER MERGES)
             var result = await _reviewService.ReviewPullRequestAsync(webhookEvent);
             
             if (result.Success)
             {
-                _logger.LogInformation("Successfully processed PR review for #{PrNumber} in {Repository}", 
+                _logger.LogInformation("Successfully processed PR review for #{PrNumber} in {Repository} - COMMENT ONLY MODE", 
                     webhookEvent.PullRequest?.Number, webhookEvent.Repository?.FullName);
                 
                 return Ok(new 
                 { 
-                    message = "Review completed successfully",
+                    message = "Review completed successfully - COMMENTS ONLY (NO MERGE)",
+                    mode = ReviewPolicy.OPERATION_MODE,
                     prNumber = webhookEvent.PullRequest?.Number,
                     repository = webhookEvent.Repository?.FullName,
-                    commentsAdded = result.CommentsAdded
+                    commentsAdded = result.CommentsAdded,
+                    safetyNote = "Bot ONLY posts comments - NEVER merges PRs"
                 });
             }
             else

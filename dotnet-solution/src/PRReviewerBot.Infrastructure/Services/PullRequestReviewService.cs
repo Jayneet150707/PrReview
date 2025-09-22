@@ -31,9 +31,13 @@ public class PullRequestReviewService : IPullRequestReviewService
 
     /// <summary>
     /// Reviews a pull request and posts comments (does NOT merge)
+    /// CRITICAL SAFETY CHECK: This method ONLY posts comments - NEVER merges PRs
     /// </summary>
     public async Task<ReviewResult> ReviewPullRequestAsync(GitHubWebhookEvent webhookEvent)
     {
+        // MANDATORY SAFETY CHECK: Validate bot is operating in safe mode
+        ReviewPolicy.ValidateSafeOperation();
+        
         var stopwatch = Stopwatch.StartNew();
         
         try
@@ -137,10 +141,11 @@ public class PullRequestReviewService : IPullRequestReviewService
             {
                 // Post positive feedback if no issues found
                 await PostGeneralCommentAsync(owner, repoName, pr.Number,
-                    "🤖 **PR Reviewer Bot**\n\n" +
+                    "🤖 **PR Reviewer Bot - COMMENT ONLY MODE**\n\n" +
                     "✅ **Great work!** No significant issues found in this PR. " +
                     "The code looks clean and follows good practices.\n\n" +
-                    "*This is an automated review. Please ensure manual review is also conducted.*");
+                    ReviewPolicy.GetSafetyDisclaimer() + "\n\n" +
+                    "*This bot ONLY posts comments and will NEVER merge your PR. Manual review and approval are still required.*");
                 commentsPosted++;
             }
 
@@ -250,7 +255,7 @@ public class PullRequestReviewService : IPullRequestReviewService
         var criticalIssues = comments.Count(c => c.Severity == CommentSeverity.Critical);
         var errorIssues = comments.Count(c => c.Severity == CommentSeverity.Error);
 
-        var summary = "🤖 **PR Reviewer Bot - Review Summary**\n\n";
+        var summary = "🤖 **PR Reviewer Bot - COMMENT ONLY MODE - Review Summary**\n\n";
         
         if (criticalIssues > 0 || errorIssues > 0)
         {
@@ -276,7 +281,9 @@ public class PullRequestReviewService : IPullRequestReviewService
         summary += $"- **Target Branch**: `{context.TargetBranch}`\n\n";
 
         summary += "---\n";
-        summary += "*This is an automated review. Please ensure manual review is also conducted for critical changes.*";
+        summary += ReviewPolicy.GetSafetyDisclaimer() + "\n\n";
+        summary += ReviewPolicy.GetOperationSummary() + "\n\n";
+        summary += "*This bot ONLY posts comments and will NEVER merge, approve, or modify your PR. Manual human review and approval are still required for all changes.*";
 
         return summary;
     }
