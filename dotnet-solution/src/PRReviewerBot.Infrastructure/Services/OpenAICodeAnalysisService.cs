@@ -156,7 +156,7 @@ public class OpenAICodeAnalysisService : ICodeAnalysisService
 
             var response = await _chatClient.CompleteChatAsync(chatMessages, new ChatCompletionOptions
             {
-                MaxTokens = 2000,
+                MaxOutputTokenCount = 2000,
                 Temperature = 0.3f
             });
 

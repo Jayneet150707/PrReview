@@ -1,9 +1,11 @@
 using PRReviewerBot.Core.Interfaces;
 using PRReviewerBot.Core.Models;
 using PRReviewerBot.Infrastructure.Extensions;
+using PRReviewerBot.Infrastructure.HealthChecks;
 using PRReviewerBot.Api.Middleware;
 using Serilog;
 using System.Reflection;
+using Asp.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,16 +50,14 @@ builder.Services.AddInfrastructure(builder.Configuration);
 // Add API versioning
 builder.Services.AddApiVersioning(opt =>
 {
-    opt.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    opt.DefaultApiVersion = new ApiVersion(1, 0);
     opt.AssumeDefaultVersionWhenUnspecified = true;
-    opt.ApiVersionReader = Microsoft.AspNetCore.Mvc.ApiVersionReader.Combine(
-        new Microsoft.AspNetCore.Mvc.QueryStringApiVersionReader("version"),
-        new Microsoft.AspNetCore.Mvc.HeaderApiVersionReader("X-Version"),
-        new Microsoft.AspNetCore.Mvc.UrlSegmentApiVersionReader()
+    opt.ApiVersionReader = ApiVersionReader.Combine(
+        new QueryStringApiVersionReader("version"),
+        new HeaderApiVersionReader("X-Version"),
+        new UrlSegmentApiVersionReader()
     );
-});
-
-builder.Services.AddVersionedApiExplorer(setup =>
+}).AddApiExplorer(setup =>
 {
     setup.GroupNameFormat = "'v'VVV";
     setup.SubstituteApiVersionInUrl = true;
