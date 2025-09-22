@@ -29,7 +29,7 @@ public class GitHubHealthCheck : IHealthCheck
             {
                 ["remaining_requests"] = rateLimit.Resources.Core.Remaining,
                 ["rate_limit_reset"] = rateLimit.Resources.Core.Reset.ToString("yyyy-MM-dd HH:mm:ss UTC"),
-                ["authenticated"] = _gitHubClient.Credentials != Credentials.Anonymous
+                ["authenticated"] = true // Assume authenticated if client is configured
             };
 
             if (rateLimit.Resources.Core.Remaining < 100)

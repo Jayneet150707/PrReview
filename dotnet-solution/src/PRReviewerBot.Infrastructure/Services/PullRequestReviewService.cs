@@ -44,7 +44,7 @@ public class PullRequestReviewService : IPullRequestReviewService
         {
             if (webhookEvent.PullRequest == null || webhookEvent.Repository == null)
             {
-                return ReviewResult.Failure("Invalid webhook event: missing pull request or repository data");
+                return ReviewResult.CreateFailure("Invalid webhook event: missing pull request or repository data");
             }
 
             var pr = webhookEvent.PullRequest;
@@ -60,7 +60,7 @@ public class PullRequestReviewService : IPullRequestReviewService
             if (!files.Any())
             {
                 _logger.LogInformation("No files to review in PR #{PrNumber}", pr.Number);
-                return ReviewResult.Success(0, new List<string>());
+                return ReviewResult.CreateSuccess(0, new List<string>());
             }
 
             // Filter files that should be reviewed
@@ -74,7 +74,7 @@ public class PullRequestReviewService : IPullRequestReviewService
                     "🤖 **PR Reviewer Bot**\n\nNo reviewable code files found in this PR. " +
                     "The bot only reviews source code files and skips binary files, dependencies, and generated content.");
                 
-                return ReviewResult.Success(1, new List<string>());
+                return ReviewResult.CreateSuccess(1, new List<string>());
             }
 
             // Check if PR is too large
@@ -94,7 +94,7 @@ public class PullRequestReviewService : IPullRequestReviewService
                     $"- **Changes**: {totalChanges} (max: {maxChanges})\n\n" +
                     $"Please consider breaking this into smaller PRs for better review quality and faster processing.");
 
-                return ReviewResult.Success(1, reviewableFiles.Select(f => f.Filename).ToList());
+                return ReviewResult.CreateSuccess(1, reviewableFiles.Select(f => f.Filename).ToList());
             }
 
             // Create PR context
@@ -151,7 +151,7 @@ public class PullRequestReviewService : IPullRequestReviewService
 
             stopwatch.Stop();
             
-            var result = ReviewResult.Success(commentsPosted, reviewableFiles.Select(f => f.Filename).ToList());
+            var result = ReviewResult.CreateSuccess(commentsPosted, reviewableFiles.Select(f => f.Filename).ToList());
             result.LinesReviewed = totalChanges;
             result.ReviewDuration = stopwatch.Elapsed;
             result.Metadata["reviewCommentsGenerated"] = reviewComments.Count;
@@ -166,7 +166,7 @@ public class PullRequestReviewService : IPullRequestReviewService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error reviewing pull request");
-            return ReviewResult.Failure($"Review failed: {ex.Message}");
+            return ReviewResult.CreateFailure($"Review failed: {ex.Message}");
         }
     }
 
@@ -181,8 +181,8 @@ public class PullRequestReviewService : IPullRequestReviewService
             
             return files.Select(f => new GitHubFile
             {
-                Filename = f.Filename,
-                Status = f.Status.StringValue,
+                Filename = f.FileName,
+                Status = f.Status,
                 Additions = f.Additions,
                 Deletions = f.Deletions,
                 Changes = f.Changes,
