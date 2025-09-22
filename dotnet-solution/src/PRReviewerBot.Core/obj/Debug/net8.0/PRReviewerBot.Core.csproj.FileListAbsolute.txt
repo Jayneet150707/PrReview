@@ -1,0 +1,15 @@
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.csproj.AssemblyReference.cache
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.GeneratedMSBuildEditorConfig.editorconfig
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.AssemblyInfoInputs.cache
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.AssemblyInfo.cs
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.csproj.CoreCompileInputs.cache
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.sourcelink.json
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/bin/Debug/net8.0/PRReviewerBot.Core.deps.json
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/bin/Debug/net8.0/PRReviewerBot.Core.dll
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/bin/Debug/net8.0/PRReviewerBot.Core.pdb
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/bin/Debug/net8.0/PRReviewerBot.Core.xml
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.dll
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/refint/PRReviewerBot.Core.dll
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.xml
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/PRReviewerBot.Core.pdb
+/tmp/Jayneet150707/PrReview/dotnet-solution/src/PRReviewerBot.Core/obj/Debug/net8.0/ref/PRReviewerBot.Core.dll

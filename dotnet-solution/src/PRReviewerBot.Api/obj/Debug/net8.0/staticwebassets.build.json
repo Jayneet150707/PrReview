@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ECGf2qC8H3UK7VZh+iaCs+LSk7n6YHaVUVvRM0fsxEk=",
+  "Source": "PRReviewerBot.Api",
+  "BasePath": "_content/PRReviewerBot.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
